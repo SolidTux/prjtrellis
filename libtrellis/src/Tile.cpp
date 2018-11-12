@@ -5,6 +5,20 @@
 #include "TileConfig.hpp"
 
 namespace Trellis {
+// Regex to extract row/column from a tile name
+static const regex tile_rxcx_re(R"(R(\d+)C(\d+))");
+
+// Universal function to get a zero-indexed row/column pair.
+pair<int, int> get_row_col_pair_from_chipsize(string name, pair<int, int> chip_size, int bias) {
+    smatch m;
+
+    if(regex_search(name, m, tile_rxcx_re)) {
+        return make_pair(stoi(m.str(1)), stoi(m.str(2)) - bias);
+    } else {
+        return make_pair(0, 0);
+    }
+}
+
 Tile::Tile(Trellis::TileInfo info, Trellis::Chip &parent) : info(info), cram(parent.cram.make_view(info.frame_offset,
                                                                                                    info.bit_offset,
                                                                                                    info.num_frames,
