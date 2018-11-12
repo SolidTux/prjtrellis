@@ -48,7 +48,9 @@ struct TileInfo {
 
         match = regex_search(name, m, tile_row_col_re);
         if(match) {
-            return make_pair(stoi(m.str(1)), stoi(m.str(2)));
+            auto row_col = make_pair(stoi(m.str(1)), stoi(m.str(2)));
+            assert(row_col <= make_pair(int(max_row), int(max_col)));
+            return row_col;
         } else {
             return make_pair(0, 0);
         }
