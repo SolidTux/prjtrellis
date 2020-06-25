@@ -1,4 +1,4 @@
 [submodule "database"]
 	path = database
-	url = https://github.com/cr1901/prjtrellis-db.git 
-	branch = facade
+	url = https://github.com/SolidTux/prjtrellis-db.git 
+    branch = xo3
